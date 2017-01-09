@@ -1,4 +1,4 @@
-DIST_HASH=${1:-$CIRCLE_SHA1}
+DIST_HASH=${2:-$CIRCLE_SHA1}
 
 if [ -z $DIST_HASH ]; then
   echo "***** A hash to deploy is needed. Bailing..."
