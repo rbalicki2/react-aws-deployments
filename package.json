@@ -31,6 +31,6 @@
   "scripts": {
     "start": "babel-node ./scripts/serve.js",
     "clean": "rm -rf ./static",
-    "build": "webpack"
+    "build": "npm run clean && webpack"
   }
 }

@@ -27,7 +27,7 @@ export default {
     extensions: ['', '.js', '.jsx'],
   },
   output: {
-    filename: path.join(staticFolder, 'bundle.js'),
+    filename: 'static/bundle.js',
     path: path.resolve(path.join(__dirname, staticFolder)),
     publicPath: '/',
   },
