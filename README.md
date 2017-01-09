@@ -49,6 +49,7 @@ staging/$SOME_HASH/cutedog.png
   * **Price class**: I always set the cheapest price class (US, Canada and EU).
   * **Alternative Domain Names**: In this example, `staging.$YOUR_DOMAIN`, e.g. in my case, `staging.myawspresentation.com`
   * **SSL Certificate**: You will need to go back, after setting up your Route 53 settings, and select the appropriate certificate (`*.$YOUR_DOMAIN`).
+  * **Default Root Object**: index.html
   * Click create! It will take several minutes for the cloudfront distribution to deploy.
 
 ### Route 53 and Certificate Manager
