@@ -8,7 +8,7 @@ export default class MyOnlyComponent extends Component {
     return (<div>
       <h1>React Nirvana</h1>
       <ul>
-        <li>Not much to see here.</li>
+        <li>This is the demo site for the React Nirvana deployment tutorial.</li>
         <li>Look at webpack.config.js, package.json and the scripts folder instead.</li>
         <li>The background should be pinkish (demonstrating that the less loader is working)</li>
         <li>This should be an image of a cute dog:
