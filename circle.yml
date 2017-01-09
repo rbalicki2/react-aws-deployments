@@ -23,7 +23,7 @@ test:
     # - npm run lint
     # - npm run test
   post:
-    - ./scripts/exclusive.sh
+    # - ./scripts/exclusive.sh
 
 # First one that matches will be run
 deployment:
