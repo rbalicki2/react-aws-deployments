@@ -3,17 +3,10 @@ machine:
     version: 4.5.0
 
 dependencies:
-  pre:
-    - sudo rm -rf /var/cache/apt/archives && sudo ln -s ~/.apt-cache /var/cache/apt/archives && mkdir -p ~/.apt-cache/partial
   cache_directories:
     - node_modules
-    - ~/.cache/yarn
-    - ~/.apt-cache
   override:
     - npm prune && npm config set registry http://registry.npmjs.org/
-    # Dependencies for do-exclusively
-    
-    - curl -L -o ~/bin/jq https://github.com/stedolan/jq/releases/download/jq-1.5rc1/jq-linux-x86_64-static && chmod +x ~/bin/jq
     # Install dependencies
     - npm install
 
@@ -21,9 +14,7 @@ test:
   override:
     # No tests or linting, this is only a test project!
     # - npm run lint
-    # - npm run test
-  post:
-    # - ./scripts/exclusive.sh
+    - npm run test
 
 # First one that matches will be run
 deployment:
@@ -48,3 +39,4 @@ deployment:
     branch: /.+/
     commands:
       - ./scripts/build.sh sandbox
+      - ./scripts/upload.sh sandbox

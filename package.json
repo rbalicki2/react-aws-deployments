@@ -31,6 +31,7 @@
   "scripts": {
     "start": "babel-node ./scripts/serve.js",
     "clean": "rm -rf ./dist",
-    "build": "npm run clean && webpack --bail"
+    "build": "npm run clean && webpack --bail",
+    "test": "echo Testing Testing 1, 2, 3. Okay, you pass."
   }
 }
