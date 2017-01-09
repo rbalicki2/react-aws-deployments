@@ -22,7 +22,6 @@ aws s3 cp \
 
 if [ $? -ne 0 ]; then
   echo "***** Failed setting build $DIST_HASH build as active"
-  slack "*dash* deployment status for $DEPLOY_NAME: failed"
   exit 1
 fi
 
