@@ -4,9 +4,9 @@ if [ -z $CIRCLECI ]; then
 fi
 
 S3_BUCKET=aws-pres
-S3_BUCKET_FOLDER=$2
+S3_BUCKET_FOLDER=$1
 
-if [ -z $2 ]; then
+if [ -z $1 ]; then
   S3_BUCKET_FOLDER=$NODE_ENV
 fi
 
