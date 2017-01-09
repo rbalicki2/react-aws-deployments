@@ -13,23 +13,25 @@ const staticFolder = isProduction
   : 'static';
 
 export default {
-  entry: [
-    './src/index',
-  ].concat(
-    isProduction
-      ? []
-      : [
-        'webpack/hot/only-dev-server',
-        'webpack-dev-server/client?http://localhost:3000',
-      ]
-    ),
+  entry: {
+    [`${staticFolder}/bundle.js`]: [
+      './src/index',
+    ].concat(
+      isProduction
+        ? []
+        : [
+          'webpack/hot/only-dev-server',
+          'webpack-dev-server/client?http://localhost:3000',
+        ]
+      ),
+  },
   resolve: {
     extensions: ['', '.js', '.jsx'],
   },
   output: {
-    filename: 'static/bundle.js',
-    path: path.resolve(path.join(__dirname, staticFolder)),
-    publicPath: '/',
+    filename: '[name]',
+    path: path.resolve('dist'),
+    publicPath: '',
   },
   devtool: isProduction ? undefined : '#cheap-module-eval-source-map',
   module: {
@@ -53,6 +55,7 @@ export default {
   plugins: [
     new HtmlWebpackPlugin({
       template: 'index.tpl.html',
+      filename: path.join(isProduction ? staticFolder : '', 'index.html'),
     }),
   ].concat(isProduction
     ? []
