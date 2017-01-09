@@ -30,6 +30,7 @@
   },
   "scripts": {
     "start": "babel-node ./scripts/serve.js",
-    "build": "NODE_ENV=production && webpack"
+    "clean": "rm -rf ./static",
+    "build": "webpack"
   }
 }

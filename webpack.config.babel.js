@@ -1,8 +1,16 @@
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import webpack from 'webpack';
+import childProcess from 'child_process';
 
 const isProduction = (process.env.NODE_ENV === 'production');
+
+const getGitRev = () => process.env.CIRCLE_SHA1
+  || childProcess.execSync('git rev-parse HEAD').toString().trim();
+
+const staticFolder = isProduction
+  ? getGitRev()
+  : 'static';
 
 export default {
   entry: [
@@ -19,8 +27,8 @@ export default {
     extensions: ['', '.js', '.jsx'],
   },
   output: {
-    filename: 'static/bundle.js',
-    path: path.resolve(path.join(__dirname, '/static')),
+    filename: path.join(staticFolder, 'bundle.js'),
+    path: path.resolve(path.join(__dirname, staticFolder)),
     publicPath: '/',
   },
   devtool: isProduction ? undefined : '#cheap-module-eval-source-map',
@@ -39,7 +47,7 @@ export default {
       { test: /\.less$/, loader: 'style!css!less' },
 
       // images
-      { test: /\.(jpeg|png)$/, loader: 'file' },
+      { test: /\.(jpeg|png)$/, loader: `file?name=${staticFolder}/[name].[ext]` },
     ],
   },
   plugins: [

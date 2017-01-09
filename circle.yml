@@ -1,0 +1,51 @@
+machine:
+  node:
+    version: 4.5.0
+
+dependencies:
+  pre:
+    - sudo rm -rf /var/cache/apt/archives && sudo ln -s ~/.apt-cache /var/cache/apt/archives && mkdir -p ~/.apt-cache/partial
+  cache_directories:
+    - node_modules
+    - ~/.cache/yarn
+    - ~/.apt-cache
+  override:
+    - npm prune && npm config set registry http://registry.npmjs.org/
+    # Dependencies for do-exclusively
+    
+    - curl -L -o ~/bin/jq https://github.com/stedolan/jq/releases/download/jq-1.5rc1/jq-linux-x86_64-static && chmod +x ~/bin/jq
+    # Install dependencies
+    - npm install
+
+test:
+  override:
+    # No tests or linting, this is only a test project!
+    # - npm run lint
+    # - npm run test
+  post:
+    - ./scripts/exclusive.sh
+
+# First one that matches will be run
+deployment:
+  # # Tags with version numbers get deployed to production
+  # prod:
+  #   tag: /v[0-9]+(\.[0-9]+)*/
+  #   commands:
+  #     - ./scripts/build.sh production
+  #     - ./scripts/deploy.sh production
+
+  # Branch master is continuously pushed to staging
+  staging:
+    branch: master
+    commands:
+      # deploy to staging
+      - ./scripts/build.sh staging
+      - ./scripts/deploy.sh staging
+      # if successful, build demo and upload to demo-builds bucket
+      - ./scripts/build.sh demo demo-builds
+
+  # Every other branch is prepared to be deployed to sandbox, but not deployed
+  sandbox:
+    branch: /.+/
+    commands:
+      - ./scripts/build.sh sandbox
