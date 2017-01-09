@@ -10,7 +10,7 @@ if [ -z $2 ]; then
   S3_BUCKET_FOLDER=$NODE_ENV
 fi
 
-echo "***** About to deploy to bucket $S3_BUCKET_FOLDER"
+echo "***** About to deploy build to $S3_BUCKET/$S3_BUCKET_FOLDER"
 
 # copy all of the files to aws
 aws s3 cp ./dist/ s3://$S3_BUCKET/$S3_BUCKET_FOLDER \
@@ -18,8 +18,8 @@ aws s3 cp ./dist/ s3://$S3_BUCKET/$S3_BUCKET_FOLDER \
   --recursive
 
 if [ $? -ne 0 ]; then
-  echo "***** Failed uploading build for environment $NODE_ENV to $S3_BUCKET_FOLDER"
+  echo "***** Failed uploading build to $S3_BUCKET/$S3_BUCKET_FOLDER"
   exit 1
 fi
 
-echo "***** Succeeded uploading environment $NODE_ENV to $S3_BUCKET_FOLDER"
+echo "***** Succeeded uploading build to $S3_BUCKET/$S3_BUCKET_FOLDER"
