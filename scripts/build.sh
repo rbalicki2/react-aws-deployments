@@ -7,7 +7,15 @@ if [ -z $CIRCLECI ]; then
   exit 1
 fi
 
-export NODE_ENV=$1
+export NODE_ENV=production
+S3_BUCKET=aws-pres
+S3_BUCKET_FOLDER=$1
+
+if [ -z $S3_BUCKET_FOLDER ]; then
+  echo "***** S3_BUCKET_FOLDER is required. Bailing..."
+  exit 1
+fi
+
 
 echo "***** About to build with environment $NODE_ENV"
 npm run build

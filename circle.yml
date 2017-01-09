@@ -41,8 +41,6 @@ deployment:
       # deploy to staging
       - ./scripts/build.sh staging
       - ./scripts/deploy.sh staging
-      # if successful, build demo and upload to demo-builds bucket
-      - ./scripts/build.sh demo demo-builds
 
   # Every other branch is prepared to be deployed to sandbox, but not deployed
   sandbox:
