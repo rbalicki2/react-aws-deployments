@@ -40,6 +40,7 @@ deployment:
     commands:
       # deploy to staging
       - ./scripts/build.sh staging
+      - ./scripts/upload.sh staging
       - ./scripts/deploy.sh staging
 
   # Every other branch is prepared to be deployed to sandbox, but not deployed
