@@ -13,6 +13,8 @@ if [ -z $S3_BUCKET_FOLDER ]; then
   exit 1
 fi
 
+echo "DISTHASH $DIST_HASH BUCKET $S3_BUCKET_FOLDER"
+
 aws s3 cp \
   s3://$S3_BUCKET/$S3_BUCKET_FOLDER/$DIST_HASH/index.html \
   s3://$S3_BUCKET/$S3_BUCKET_FOLDER/index.html \
