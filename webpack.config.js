@@ -35,17 +35,8 @@ export default {
           .concat(['babel']),
       },
 
-      // CSS loader
-      { test: /\.css$/, loader: 'style!css' },
-
       // LESS
       { test: /\.less$/, loader: 'style!css!less' },
-
-      // Font loader
-      {
-        test: /\.(ttf|eot|svg|woff|woff2)(\?v=[0-9].[0-9].[0-9])?$/,
-        loader: 'file-loader?name=[name].[ext]',
-      },
 
       // images
       { test: /\.(jpeg|png)$/, loader: 'file' },
