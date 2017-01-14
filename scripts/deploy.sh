@@ -23,7 +23,7 @@ aws s3 cp \
 
 date +%s%N
 
-aws s3 rm s3://$S3_BUCKET/$S3_BUCKET_FOLDER/current/
+aws s3 rm s3://$S3_BUCKET/$S3_BUCKET_FOLDER/current --recursive
 
 aws s3 mv s3://$S3_BUCKET/$S3_BUCKET_FOLDER/stage/ \
   s3://$S3_BUCKET/$S3_BUCKET_FOLDER/current/ --recursive
