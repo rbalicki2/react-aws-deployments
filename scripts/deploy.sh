@@ -21,11 +21,13 @@ aws s3 cp \
   --metadata-directive REPLACE \
   --recursive
 
-aws s3 rm s3://$S3_BUCKET/$S3_BUCKET_FOLDER/current
+aws s3 rm s3://$S3_BUCKET/$S3_BUCKET_FOLDER/current/* --recursive
 
-aws s3 mv s3://$S3_BUCKET/$S3_BUCKET_FOLDER/stage s3://$S3_BUCKET/$S3_BUCKET_FOLDER/current
+aws s3 mv s3://$S3_BUCKET/$S3_BUCKET_FOLDER/stage/* \
+  s3://$S3_BUCKET/$S3_BUCKET_FOLDER/current/* \
+  --recursive
 
-aws s3 rm s3://$S3_BUCKET/$S3_BUCKET_FOLDER/stage
+aws s3 rm s3://$S3_BUCKET/$S3_BUCKET_FOLDER/stage/* --recursive
 
 if [ $? -ne 0 ]; then
   echo "***** Failed setting build $DIST_HASH build as active"
