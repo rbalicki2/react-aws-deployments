@@ -13,8 +13,6 @@ if [ -z $S3_BUCKET_FOLDER ]; then
   exit 1
 fi
 
-date +%s%N
-
 aws s3 cp \
   s3://$S3_BUCKET/$S3_BUCKET_FOLDER/$DIST_HASH \
   s3://$S3_BUCKET/$S3_BUCKET_FOLDER/stage \
@@ -22,6 +20,8 @@ aws s3 cp \
   --cache-control max-age=0,no-cache \
   --metadata-directive REPLACE \
   --recursive
+
+date +%s%N
 
 aws s3 rm s3://$S3_BUCKET/$S3_BUCKET_FOLDER/current/
 
