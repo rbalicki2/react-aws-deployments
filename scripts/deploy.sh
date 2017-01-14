@@ -13,7 +13,7 @@ if [ -z $S3_BUCKET_FOLDER ]; then
   exit 1
 fi
 
-echo 1
+date +%s%N
 
 aws s3 cp \
   s3://$S3_BUCKET/$S3_BUCKET_FOLDER/$DIST_HASH \
@@ -27,6 +27,8 @@ aws s3 rm s3://$S3_BUCKET/$S3_BUCKET_FOLDER/current/
 
 aws s3 mv s3://$S3_BUCKET/$S3_BUCKET_FOLDER/stage/ \
   s3://$S3_BUCKET/$S3_BUCKET_FOLDER/current/ --recursive
+
+date +%s%N
 
 if [ $? -ne 0 ]; then
   echo "***** Failed setting build $DIST_HASH build as active"
