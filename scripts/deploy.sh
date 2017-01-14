@@ -13,6 +13,8 @@ if [ -z $S3_BUCKET_FOLDER ]; then
   exit 1
 fi
 
+echo 1
+
 aws s3 cp \
   s3://$S3_BUCKET/$S3_BUCKET_FOLDER/$DIST_HASH \
   s3://$S3_BUCKET/$S3_BUCKET_FOLDER/stage \
@@ -21,11 +23,17 @@ aws s3 cp \
   --metadata-directive REPLACE \
   --recursive
 
+echo 2
+
 aws s3 rm s3://$S3_BUCKET/$S3_BUCKET_FOLDER/current/* --recursive
+
+echo 3
 
 aws s3 mv s3://$S3_BUCKET/$S3_BUCKET_FOLDER/stage/* \
   s3://$S3_BUCKET/$S3_BUCKET_FOLDER/current/* \
   --recursive
+
+echo 4
 
 aws s3 rm s3://$S3_BUCKET/$S3_BUCKET_FOLDER/stage/* --recursive
 
