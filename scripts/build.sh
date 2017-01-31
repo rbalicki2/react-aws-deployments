@@ -21,7 +21,7 @@ echo "***** About to build with environment $NODE_ENV"
 npm run build
 
 if [ $? -ne 0 ]; then
-  echo "***** Failed uploading build for environment $NODE_ENV to $S3_BUCKET_FOLDER"
+  echo "***** Failed building for environment $NODE_ENV to $S3_BUCKET_FOLDER"
   exit 1
 fi
 
