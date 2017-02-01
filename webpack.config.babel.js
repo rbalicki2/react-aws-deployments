@@ -9,8 +9,10 @@ const getGitRev = () => process.env.CIRCLE_SHA1
   || childProcess.execSync('git rev-parse HEAD').toString().trim();
 
 const staticFolder = isProduction
-  ? `/${getGitRev()}`
+  ? getGitRev()
   : 'static';
+
+const staticFolderWithSlash = `${isProduction ? '/' : ''}${staticFolder}`;
 
 export default {
   entry: {
@@ -49,7 +51,7 @@ export default {
       { test: /\.less$/, loader: 'style!css!less' },
 
       // images
-      { test: /\.(jpeg|png)$/, loader: `file?name=${staticFolder}/[name].[ext]` },
+      { test: /\.(jpeg|png)$/, loader: `file?name=${staticFolderWithSlash}/[name].[ext]` },
     ],
   },
   plugins: [
