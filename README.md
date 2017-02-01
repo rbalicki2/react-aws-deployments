@@ -1,15 +1,26 @@
-# React Deployment Nirvana
+# Super Smooth Deployments with React and AWS
 
-> Your deploys have never been so free of suffering.
+> Your deploys have never been so pain-free.
 
 ## About this guide
 
-This guide will help you register a domain and set it up with Route 53, Cloudfront and S3 to have a simple deploy process.
-WRITE MOAR HERE
+This guide will help you register a domain and set it up with Route53, Cloudfront and S3 to have a smooth deployment process.
 
-## Initial setup: getting CircleCI to work
+## Overall architecture
 
-If you complete the following steps, you should be able to push a new version to the repository
+* Webpack creates your **build** in the `/dist/$GIT_HASH` folder. The `$GIT_HASH` here is important, as it means that every resource URL will be unique, and we never have caching issues.
+* We **upload** the contents of the `/dist` folder to `s3://$S3_BUCKET/$ENVIRONMENT`. (After several deploys, your `$ENVIRONMENT` folder have many folders in it.)
+* To **deploy**, we simply copy `index.html` from `s3://$S3_BUCKET/$ENVIRONMENT/$GIT_HASH/` to `s3://$S3_BUCKET/$ENVIRONMENT/`, making sure to specify that this file should never be cached. All resources (CSS, JS, etc.) that you request from this `index.html` file will be requested from their `$GIT_HASH` folders, and can be cached indefinitely.
+* Cloudfront will compress these files and serve them from S3.
+* Route53 will convert an ugly cloudfront URL to a pretty URL.
+
+## Setup the deployment process
+
+Ok! Let's create the deployment process.
+
+### Getting CircleCI to work
+
+If you complete the following steps, you should be able to push a new version to the repository.
 
 * Clone this repository using Github.
 * Create a CircleCI account, if you do not have one, and associate it with your Github account.
@@ -27,8 +38,6 @@ staging/$SOME_HASH/index.html
 staging/$SOME_HASH/bundle.js
 staging/$SOME_HASH/cutedog.png
 ```
-
-## Initial steps: setting up the various AWS services
 
 ### S3
 
