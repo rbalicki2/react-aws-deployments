@@ -31,7 +31,7 @@ export default {
     extensions: ['', '.js', '.jsx'],
   },
   output: {
-    filename: '[name]',
+    filename: '/[name]',
     path: path.resolve('dist'),
     publicPath: '',
   },
@@ -51,7 +51,7 @@ export default {
       { test: /\.less$/, loader: 'style!css!less' },
 
       // images
-      { test: /\.(jpeg|png)$/, loader: `file?name=${staticFolderWithSlash}/[name].[ext]` },
+      { test: /\.(jpeg|png)$/, loader: `file?name=/${staticFolderWithSlash}/[name].[ext]` },
     ],
   },
   plugins: [
