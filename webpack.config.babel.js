@@ -9,7 +9,7 @@ const getGitRev = () => process.env.CIRCLE_SHA1
   || childProcess.execSync('git rev-parse HEAD').toString().trim();
 
 const staticFolder = isProduction
-  ? getGitRev()
+  ? `/${getGitRev()}`
   : 'static';
 
 export default {
