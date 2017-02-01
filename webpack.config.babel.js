@@ -12,11 +12,13 @@ const staticFolder = isProduction
   ? getGitRev()
   : 'static';
 
+// locally, we cannot have a leading slash. In production, though,
+// we want one, because otherwise the request will not be relative to the root.
 const staticFolderWithSlash = `${isProduction ? '/' : ''}${staticFolder}`;
 
 export default {
   entry: {
-    [`${staticFolder}/bundle.js`]: [
+    [`${staticFolderWithSlash}/bundle.js`]: [
       './src/index',
     ].concat(
       isProduction
@@ -31,7 +33,7 @@ export default {
     extensions: ['', '.js', '.jsx'],
   },
   output: {
-    filename: '/[name]',
+    filename: '[name]',
     path: path.resolve('dist'),
     publicPath: '',
   },
@@ -51,7 +53,7 @@ export default {
       { test: /\.less$/, loader: 'style!css!less' },
 
       // images
-      { test: /\.(jpeg|png)$/, loader: `file?name=/${staticFolderWithSlash}/[name].[ext]` },
+      { test: /\.(jpeg|png)$/, loader: `file?name=${staticFolderWithSlash}/[name].[ext]` },
     ],
   },
   plugins: [
