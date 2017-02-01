@@ -29,7 +29,6 @@ deployment:
   staging:
     branch: master
     commands:
-      # deploy to staging
       - ./scripts/build.sh staging
       - ./scripts/upload.sh staging
       - ./scripts/deploy.sh staging
