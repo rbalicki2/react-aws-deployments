@@ -53,7 +53,7 @@ export default {
       { test: /\.less$/, loader: 'style!css!less' },
 
       // images
-      { test: /\.(jpeg|png)$/, loader: `file?name=${staticFolderWithSlash}/[name].[ext]` },
+      { test: /\.(jpeg|png|jpg)$/, loader: `file?name=${staticFolderWithSlash}/[name].[ext]` },
     ],
   },
   plugins: [

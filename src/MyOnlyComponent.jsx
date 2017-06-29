@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import './main.less';
-import cuteDogUrl from './cutedog.png';
+import cuteDogUrl from './cutedog.jpg';
 
 export default class MyOnlyComponent extends Component {
   render() {
